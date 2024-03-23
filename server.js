@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const {
@@ -45,17 +46,16 @@ app.get("/api/test/search", async (req, res) => {
   }
 });
 
-
 // Update one solution API
 app.put("/api/test/:mongoId", async (req, res) => {
-    const mongoId = req.params.mongoId;
-    const newData = req.body;
-    try {
-        const response = await updateOne(mongoId, newData);
-        res.json(response);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+  const mongoId = req.params.mongoId;
+  const newData = req.body;
+  try {
+    const response = await updateOne(mongoId, newData);
+    res.json(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 // Remove one solution API
 app.delete("/api/test/:mongoId", async (req, res) => {

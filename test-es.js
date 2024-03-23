@@ -10,11 +10,8 @@ async function insertAll(testArray) {
     ]);
     unirest
       .post("https://localhost:9200/test/_bulk")
-      .auth({
-        user: "elastic",
-        password: "1FvbJnCYX-JTSvj8XEB4",
-        sendImmediately: true,
-      })
+      .auth(process.env.ES_USERNAME, process.env.ES_PASSWORD)
+
       .headers({
         "Content-Type": "application/json",
       })
@@ -37,11 +34,8 @@ async function insertOne(mongoId, data) {
   return new Promise((resolve, reject) => {
     unirest
       .post("https://localhost:9200/test/_doc/" + mongoId)
-      .auth({
-        user: "elastic",
-        password: "1FvbJnCYX-JTSvj8XEB4",
-        sendImmediately: true,
-      })
+      .auth(process.env.ES_USERNAME, process.env.ES_PASSWORD)
+
       .headers({
         "Content-Type": "application/json",
       })
@@ -64,11 +58,8 @@ async function search(businessId, cardtype, query) {
   return new Promise((resolve, reject) => {
     unirest
       .get("https://localhost:9200/test/_search")
-      .auth({
-        user: "elastic",
-        password: "1FvbJnCYX-JTSvj8XEB4",
-        // sendImmediately: true,
-      })
+      .auth(process.env.ES_USERNAME, process.env.ES_PASSWORD)
+
       .headers({
         "Content-Type": "application/json",
       })
@@ -163,11 +154,7 @@ async function deleteOne(mongoId) {
   return new Promise((resolve, reject) => {
     unirest
       .delete("https://localhost:9200/test/_doc/" + mongoId)
-      .auth({
-        user: "elastic",
-        password: "1FvbJnCYX-JTSvj8XEB4",
-        sendImmediately: true,
-      })
+      .auth(process.env.ES_USERNAME, process.env.ES_PASSWORD)
       .headers({
         "Content-Type": "application/json",
       })
